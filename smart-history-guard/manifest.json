@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Smart History Guard",
+  "version": "1.0.2",
+  "description": "Prevents back-button hijacking and history flooding without breaking SPAs.",
+  "minimum_chrome_version": "111",
+  "permissions": ["storage", "activeTab", "scripting", "webNavigation"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["injector.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_title": "Smart History Guard",
+    "default_popup": "popup.html"
+  }
+}

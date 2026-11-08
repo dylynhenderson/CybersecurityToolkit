@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Smart History Guard Test Bench</title></head>
+<body>
+  <h2>Smart History Guard Test Bench</h2>
+  <p>Serve over http (python3 -m http.server)</p>
+  <button id="t1">Test 1: identical-URL push (expect +0)</button>
+  <button id="t2">Test 2: 5 auto pushes after 600 ms (expect +1)</button>
+  <button id="t3">Test 3: real click, new URL (expect +1)</button>
+  <button id="t4">Test 4: click, then 5 pushes (expect +2)</button>
+  <pre id="log">Injected: <span id="inj"></span></pre>
+  <script>
+    document.getElementById('inj').textContent = String(!!window.__SHG_INSTALLED__);
+    const log = document.getElementById('log');
+    const out = (m) => { log.textContent += '\n' + m; };
+    const report = (name, before, want) => {
+      const d = history.length - before;
+      out(`${name}: delta=${d} (want ${want}) -> ${d === want ? 'PASS' : 'FAIL'}`
+        + (window.__SHG_STATS__ ? ` | stats ${JSON.stringify(window.__SHG_STATS__)}` : ' | extension NOT injected'));
+    };
+
+    t1.onclick = () => {
+      const b = history.length;
+      history.pushState({ test: 'dup' }, '', location.href);
+      report('Test 1', b, 0);
+    };
+    t2.onclick = () => {
+      const b = history.length;
+      setTimeout(() => {                       // runs with no live gesture
+        for (let i = 0; i < 5; i++) history.pushState({ count: i }, '', `?spam=${i}`);
+        report('Test 2', b, 1);
+      }, 1200);
+    };
+    t3.onclick = () => {
+      const b = history.length;
+      history.pushState({ page: 'new' }, '', `?section=${Date.now()}`);
+      report('Test 3', b, 1);
+    };
+    t4.onclick = () => {
+      const b = history.length;
+      for (let i = 0; i < 5; i++) history.pushState(null, '', `?burst=${Date.now()}_${i}`);
+      report('Test 4', b, 2);
+    };
+  </script>
+</body>
+</html>

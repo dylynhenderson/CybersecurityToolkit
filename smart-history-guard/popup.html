@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 260px; font-family: system-ui, sans-serif; padding: 12px; margin: 0; }
+    .card { display: flex; flex-direction: column; gap: 10px; }
+    .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; }
+    .domain { font-weight: bold; font-size: 12px; word-break: break-all; color: #555; }
+    .status { font-size: 11px; color: #2e7d32; }
+    .status.off { color: #b71c1c; }
+    footer { margin-top: 6px; font-size: 10px; color: #888; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="domain" id="domainDisplay">Loading...</div>
+    <div class="status" id="status"></div>
+    <div class="row">
+      <label for="omitToggle">Omit / Allow This Site</label>
+      <input type="checkbox" id="omitToggle">
+    </div>
+    <div class="row">
+      <label for="masterToggle">Enable Guard Globally</label>
+      <input type="checkbox" id="masterToggle" checked>
+    </div>
+    <footer>Smart History Guard v1.0.2 (MIT Licensed)<br>Reload the page after changing settings if a site misbehaves.</footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
