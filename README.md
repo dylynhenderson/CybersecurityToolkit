@@ -149,39 +149,6 @@ python3 rsaCracker.py
 
 ---
 
-## Adding a New Tool (Template)
-
-Copy this block for each new tool, delete the guidance in parentheses, and add a row to the table at the top.
-
-```markdown
-## Tool Name
-
-**File / Folder:** `filename.py`
-
-**Description:** (One or two sentences: what the tool does and why it is useful.)
-
-**Requirements:** (Language version, third-party libraries, OS or permissions needed.)
-
-**Usage:**
-(Command to run, plus any arguments or prompts.)
-
-**Input / Output:** (What the tool reads and what it prints or produces.)
-
-**Example:**
-(A short sample run with real-looking input and output.)
-
-**Notes and limitations:** (Known issues, assumptions, speed or accuracy caveats, and legal or ethical notes such as "only use on systems you own".)
-```
-
-**Description guide**
-- Start with what the tool *does*, then why it matters.
-- Keep each section to roughly 10 to 20 lines. Put long write-ups in a separate file inside the tool's folder.
-- Always include one runnable example.
-- State clearly what the tool does *not* do.
-- Add an authorization note for anything that probes networks, systems, or accounts.
-
----
-
 ## License
 
 Released under the [MIT License](LICENSE). Copyright (c) 2026 Dylan Henderson and contributors.
